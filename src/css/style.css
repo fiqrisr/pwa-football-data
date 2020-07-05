@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Rancho';
+    src: url(../fonts/Rancho-Regular.ttf);
+}
+
+.brand-logo {
+    font-family: 'Rancho', sans-serif;
+    padding: 0px;
+    white-space: nowrap;
+}
