@@ -16,8 +16,4 @@ export class Competition implements ICompetition {
     constructor(data: Partial<Competition> = {}) {
         Object.assign(this, data);
     }
-
-    print() {
-        console.log(`${this.id}, ${this.area.id}, ${this.area.name}`);
-    }
 }

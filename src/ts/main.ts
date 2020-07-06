@@ -1,22 +1,28 @@
-import { Competition } from './models/Competition';
+import { competitionListController } from './controllers/competitionList';
 
-const getData = (url: string) => {
-    return new Promise((resolve, reject) => {
-        fetch(url, {
-            headers: {
-                'X-Auth-Token': '321f62aebd5c4bce8a97f2c39a19a455',
-            },
-        })
-            .then((response) => resolve(response.json()))
-            .catch(() => console.error('Failed to load data'));
-    });
-};
+const competitionListID = [
+    '2001',
+    '2017',
+    '2021',
+    '2003',
+    // '2004',
+    // '2015',
+    // '2019',
+    // '2016',
+    // '2000',
+    // '2018',
+];
 
-async function printToConsole() {
-    const data = await getData('https://api.football-data.org/v2/competitions/2000');
+// async function printToConsole() {
+//     const api = new APIRequest(URI);
+//     api.headers = { 'X-Auth-Token': API_TOKEN };
 
-    let compData = new Competition(data);
-    compData.print();
-}
+//     const data = await api.getData('competitions/2000');
 
-document.getElementById('send').addEventListener('click', printToConsole);
+//     const comp = new Competition(data);
+//     comp.print();
+// }
+
+// document.getElementById('send').addEventListener('click', printToConsole);
+
+competitionListController(competitionListID);
