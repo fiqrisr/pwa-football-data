@@ -1,4 +1,6 @@
-import { ICompetition, IArea, ISeason } from '../interfaces/ICompetition';
+import { ICompetition } from '../interfaces/ICompetition';
+import { ISeason } from '../interfaces/ISeason';
+import { IArea } from '../interfaces/IArea';
 
 export class Competition implements ICompetition {
     id: number;
@@ -13,5 +15,9 @@ export class Competition implements ICompetition {
 
     constructor(data: Partial<Competition> = {}) {
         Object.assign(this, data);
+    }
+
+    print() {
+        console.log(`${this.id}, ${this.area.id}, ${this.area.name}`);
     }
 }
