@@ -3,15 +3,15 @@ import { APIRequest } from './api';
 const URI: string = 'https://api.football-data.org/v2/';
 const API_TOKEN: string = '321f62aebd5c4bce8a97f2c39a19a455';
 
-const elements = {
+export const elements = {
     contentBody: document.querySelector('#content-body'),
     pageTitle: document.querySelector('#page-title'),
 };
 
-const apiRequest = new APIRequest(URI);
+export const apiRequest = new APIRequest(URI);
 apiRequest.headers = { 'X-Auth-Token': API_TOKEN };
 
-const renderPreloader = (parent: Element) => {
+export const renderPreloader = (parent: Element) => {
     const loader = `
         <div class="preloader-container center col s12" id="preloader">
             <div class="preloader-wrapper active">
@@ -31,9 +31,11 @@ const renderPreloader = (parent: Element) => {
     parent.insertAdjacentHTML('beforeend', loader);
 };
 
-const clearPreloader = () => {
+export const clearPreloader = () => {
     const loader = document.querySelector('#preloader');
     if (loader) loader.parentElement.removeChild(loader);
 };
 
-export { elements, apiRequest, renderPreloader, clearPreloader };
+export const clearContentBody = () => {
+    elements.contentBody.innerHTML = '';
+};
