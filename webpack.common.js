@@ -47,13 +47,13 @@ module.exports = {
             template: './src/index.html',
             filename: 'index.html',
         }),
-        // new CopyPlugin({
-        //     patterns: [
-        //         { from: 'src/pages', to: 'pages/' },
-        //         { from: 'src/service-worker.js', to: 'service-worker.js' },
-        //         { from: 'src/img', to: 'images/' },
-        //         { from: 'src/manifest.json', to: 'manifest.json' },
-        //     ],
-        // }),
+        new CopyPlugin({
+            patterns: [
+                //{ from: 'src/pages', to: 'pages/' },
+                //{ from: 'src/service-worker.js', to: 'service-worker.js' },
+                { from: 'src/img', to: 'images/' },
+                //{ from: 'src/manifest.json', to: 'manifest.json' },
+            ],
+        }),
     ],
 };

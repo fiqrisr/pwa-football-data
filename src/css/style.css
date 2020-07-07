@@ -16,3 +16,18 @@
 .title {
     margin-bottom: 40px;
 }
+
+.competition--logo {
+    height: 300px;
+}
+
+.competition--logo > img {
+    padding: 30px;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.competition--content {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
