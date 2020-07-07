@@ -1,4 +1,4 @@
-import { competitionListController } from './controllers/competitionList';
+import { competitionListController } from './controllers/competitionListController';
 
 const competitionListID = [
     '2001',
