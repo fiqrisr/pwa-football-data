@@ -12,7 +12,10 @@ export const renderCompetition = (item: Competition) => {
         <div class="col s12">
             <ul class="collapsible">
                 <li>
-                    <div class="collapsible-header">Current Season Standings</div>
+                    <div class="collapsible-header">
+                        Current Season Standings
+                        <span class="collapsible-arrow valign-wrapper"><i class="material-icons">keyboard_arrow_down</i></span>
+                    </div>
                     <div class="collapsible-body">
                         <table class="highlight responsive-table centered">
                             <thead>

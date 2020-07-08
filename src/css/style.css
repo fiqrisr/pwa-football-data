@@ -35,3 +35,18 @@
 .competition--content {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+.collapsible-header {
+    position: relative;
+}
+
+.collapsible-arrow {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+}
+
+.collapsible-arrow > i {
+    margin: 0;
+}
