@@ -1,5 +1,5 @@
 import { elements, apiRequest, renderPreloader, clearPreloader, clearContentBody } from '../base';
-import { Competition } from '../models/Competition';
+import { Competition } from '../models/competition';
 import { renderCompetitionList } from '../views/competitionListView';
 
 export let competitionList = new Map();

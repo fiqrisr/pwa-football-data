@@ -1,16 +1,14 @@
-import { ICompetition } from '../interfaces/ICompetition';
-import { ISeason } from '../interfaces/ISeason';
-import { IArea } from '../interfaces/IArea';
+import { ICompetition, Season, Area } from '../interfaces/interfaces';
 
 export class Competition implements ICompetition {
     id: number;
-    area: IArea;
+    area: Area;
     name: string;
     code: string;
     emblemUrl: null;
     plan: string;
-    currentSeason: ISeason;
-    seasons: ISeason[];
+    currentSeason: Season;
+    seasons: Season[];
     lastUpdated: Date;
 
     constructor(data: Partial<Competition> = {}) {

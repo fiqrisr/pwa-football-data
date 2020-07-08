@@ -1,5 +1,5 @@
 import { elements } from '../base';
-import { Competition } from '../models/Competition';
+import { Competition } from '../models/competition';
 
 export const renderCompetitionList = (item: Competition) => {
     const markup = `

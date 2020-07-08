@@ -1,6 +1,6 @@
 import { elements } from '../base';
-import { Competition } from '../models/Competition';
-import { IStanding } from '../interfaces/IStanding';
+import { Competition } from '../models/competition';
+import { Standing } from '../interfaces/interfaces';
 
 export const renderCompetition = (item: Competition) => {
     const markup = `
@@ -40,8 +40,8 @@ export const renderCompetition = (item: Competition) => {
     M.Collapsible.init(document.querySelector('.collapsible'), { accordion: false });
 };
 
-export const renderCompetitionStandings = (standingList: IStanding[]) => {
-    const tableBody = document.querySelector('#competition-standings-table');
+export const renderCompetitionStandings = (standingList: Standing[]) => {
+    const standingsTable = document.querySelector('#competition-standings-table');
 
     for (const standing of standingList) {
         const markup = `
@@ -62,6 +62,10 @@ export const renderCompetitionStandings = (standingList: IStanding[]) => {
         </tr>
         `;
 
-        tableBody.insertAdjacentHTML('beforeend', markup);
+        standingsTable.insertAdjacentHTML('beforeend', markup);
     }
 };
+
+// export const renderUpcomingMatches = (competitionID: number) => {
+//     const upcomingMatchesTable
+// }

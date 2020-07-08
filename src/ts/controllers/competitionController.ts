@@ -1,7 +1,7 @@
 import { elements, apiRequest, renderPreloader, clearPreloader, clearContentBody } from '../base';
-import { Competition } from '../models/Competition';
+import { Competition } from '../models/competition';
 import { renderCompetition, renderCompetitionStandings } from '../views/competitionView';
-import { IStanding } from '../interfaces/IStanding';
+import { Standing } from '../interfaces/interfaces';
 
 export const competitionController = async (id: string) => {
     clearContentBody();
@@ -22,9 +22,9 @@ const loadStandings = async (competitionID: string) => {
         `competitions/${competitionID}/standings?standingType=TOTAL`
     );
 
-    const standings: IStanding[] = [];
+    const standings: Standing[] = [];
 
-    data.standings[0].table.forEach((team: IStanding) => {
+    data.standings[0].table.forEach((team: Standing) => {
         standings.push(team);
     });
 
