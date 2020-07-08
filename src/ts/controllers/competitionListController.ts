@@ -9,13 +9,16 @@ export const competitionListController = async (idList: string[]) => {
     elements.pageTitle.textContent = 'Competitions';
     renderPreloader(elements.contentBody);
 
-    for (const id of idList) {
-        const data: any = await apiRequest.getData(`competitions/${id}`);
-        const competition = new Competition(data);
+    const data: any = await apiRequest.getData(`competitions`);
 
-        if (!competitionList.has(competition.id)) competitionList.set(competition.id, competition);
-    }
+    data.competitions.forEach((competition: any) => {
+        competitionList.set(competition.id, competition);
+    });
 
-    competitionList.forEach((competition) => renderCompetitionList(competition));
+    idList.forEach((id) => {
+        const competition = new Competition(competitionList.get(+id));
+        renderCompetitionList(competition);
+    });
+
     clearPreloader();
 };
