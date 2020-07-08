@@ -51,7 +51,7 @@ export const renderCompetitionStandings = (standingList: Standing[]) => {
         <tr>
             <td>${standing.position}</td>
             <td>
-                <img src="${standing.team.crestUrl}" alt="${standing.team.name}" width="30">
+                <img src="${standing.team.crestUrl}" alt="${standing.team.name}" onerror="this.onerror=null; this.src='images/blank-badge.svg'" width="30">
             </td>
             <td>${standing.team.name}</td>
             <td>${standing.playedGames}</td>

@@ -3,6 +3,17 @@
     src: url(../fonts/Rancho-Regular.ttf);
 }
 
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    margin-bottom: 50px;
+}
+
 .brand-logo {
     font-family: 'Rancho', sans-serif;
     padding: 0px;
@@ -49,4 +60,8 @@
 
 .collapsible-arrow > i {
     margin: 0;
+}
+
+.page-footer {
+    padding: 15px;
 }
