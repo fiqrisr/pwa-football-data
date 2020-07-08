@@ -2,6 +2,7 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/index.ts',
@@ -19,13 +20,6 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            },
-            {
-                test: /\.(png|jpg|jpeg|gif|svg)$/,
-                loader: 'file-loader',
-                options: {
-                    outputPath: 'img',
-                },
             },
             {
                 test: /\.(woff|woff2|ttf|eot)$/,
@@ -49,11 +43,11 @@ module.exports = {
         }),
         new CopyPlugin({
             patterns: [
-                //{ from: 'src/pages', to: 'pages/' },
                 //{ from: 'src/service-worker.js', to: 'service-worker.js' },
                 { from: 'src/img', to: 'images/' },
                 //{ from: 'src/manifest.json', to: 'manifest.json' },
             ],
         }),
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ],
 };

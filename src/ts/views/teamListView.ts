@@ -1,5 +1,6 @@
 import { elements } from '../base';
 import { Competition } from '../models/competition';
+import { Team } from '../models/team';
 
 export const renderTeamSelect = (competitionList: Array<Competition>) => {
     const markup = `
@@ -12,6 +13,10 @@ export const renderTeamSelect = (competitionList: Array<Competition>) => {
     `;
 
     elements.contentBody.insertAdjacentHTML('beforeend', markup);
+    elements.contentBody.insertAdjacentHTML(
+        'beforeend',
+        '<div id="team-list-container" style="margin-top: 50px;"></div>'
+    );
 
     const teamSelectElement = document.querySelector('#team-select');
 
@@ -20,7 +25,24 @@ export const renderTeamSelect = (competitionList: Array<Competition>) => {
         teamSelectElement.insertAdjacentHTML('beforeend', option);
     });
 
-    M.FormSelect.init(document.querySelector('#team-select'));
+    M.FormSelect.init(teamSelectElement);
 };
 
-export const renderTeam = (teamID: string) => {};
+export const renderTeam = (team: Team) => {
+    const markup = `
+            <div class="col s12 m4 l3">
+                <div class="card">
+                    <div class="card-image team--logo valign-wrapper">
+                        <img src="${team.crestUrl}" alt="${team.name} logo" onerror="this.onerror=null; this.src='images/blank-badge.svg'"/>
+                        <a class="btn-floating halfway-fab waves-effect waves-light red accent-3"><i class="material-icons">bookmark_border</i></a>
+                    </div>
+                    <div class="card-content team--content">
+                        <a href="${team.website}" class="card-title blue-text truncate" target="_blank">${team.name}</a>
+                        <p class="">Founded: ${team.founded}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+    document.querySelector('#team-list-container').insertAdjacentHTML('beforeend', markup);
+};

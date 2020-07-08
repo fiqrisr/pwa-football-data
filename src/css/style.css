@@ -21,7 +21,7 @@ main {
 }
 
 #app-main {
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 #content-body {
@@ -36,15 +36,21 @@ main {
     height: 300px;
 }
 
-.competition--logo > img {
+.competition--logo > img,
+.team--logo > img {
     padding: 30px;
     height: 100%;
     width: 100%;
     object-fit: contain;
 }
 
-.competition--content {
+.competition--content,
+.team--content {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.team--logo {
+    height: 250px;
 }
 
 .collapsible-header {
