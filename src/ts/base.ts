@@ -31,6 +31,10 @@ export const renderPreloader = (parent: Element) => {
     parent.insertAdjacentHTML('beforeend', loader);
 };
 
+export const loadPageNotFound = () => {
+    elements.pageTitle.textContent = '404 not found';
+};
+
 export const clearPreloader = () => {
     const loader = document.querySelector('#preloader');
     if (loader) loader.parentElement.removeChild(loader);

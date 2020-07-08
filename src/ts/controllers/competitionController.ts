@@ -1,4 +1,11 @@
-import { elements, apiRequest, renderPreloader, clearPreloader, clearContentBody } from '../base';
+import {
+    elements,
+    apiRequest,
+    renderPreloader,
+    clearPreloader,
+    clearContentBody,
+    loadPageNotFound,
+} from '../base';
 import { Competition } from '../models/competition';
 import { renderCompetition, renderCompetitionStandings } from '../views/competitionView';
 import { Standing } from '../interfaces/interfaces';
@@ -7,14 +14,21 @@ export const competitionController = async (id: string) => {
     clearContentBody();
     renderPreloader(elements.contentBody);
 
-    const data: any = await apiRequest.getData(`competitions/${id}`);
-    const competition = new Competition(data);
+    await apiRequest
+        .getData(`competitions/${id}`)
+        .then((response) => {
+            const competition = new Competition(response);
 
-    elements.pageTitle.textContent = competition.name;
-    renderCompetition(competition);
-    clearPreloader();
+            elements.pageTitle.textContent = competition.name;
+            renderCompetition(competition);
+            clearPreloader();
 
-    loadStandings(competition.id.toString());
+            loadStandings(competition.id.toString());
+        })
+        .catch(() => {
+            loadPageNotFound();
+            clearPreloader();
+        });
 };
 
 const loadStandings = async (competitionID: string) => {

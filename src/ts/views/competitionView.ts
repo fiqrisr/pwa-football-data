@@ -1,12 +1,20 @@
 import { elements } from '../base';
 import { Competition } from '../models/competition';
 import { Standing } from '../interfaces/interfaces';
+import * as moment from 'moment';
 
 export const renderCompetition = (item: Competition) => {
     const markup = `
-        <div class="col s12 center" style="margin-bottom: 40px;">
+        <div class="col s12 center" style="margin-bottom: 30px;">
             <div>
                 <img width="250" src="images/competitions/${item.id}.webp" alt="${item.name} logo">
+            </div>
+            <div style="margin-top: 40px">
+                <h5>Current Season:</h5>
+                <p>
+                    ${moment(item.currentSeason.startDate).format('MMMM Do, YYYY')} - 
+                    ${moment(item.currentSeason.endDate).format('MMMM Do, YYYY')}
+                </p>
             </div>
         </div>
         <div class="col s12">
