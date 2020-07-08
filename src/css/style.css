@@ -65,3 +65,7 @@ main {
 .page-footer {
     padding: 15px;
 }
+
+.select-dropdown li img {
+    height: 38px;
+}

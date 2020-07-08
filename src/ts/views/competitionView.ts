@@ -77,6 +77,8 @@ export const renderCompetitionStandings = (standingList: Standing[]) => {
     }
 };
 
+// TODO
+
 // export const renderUpcomingMatches = (competitionID: number) => {
 //     const upcomingMatchesTable
 // }

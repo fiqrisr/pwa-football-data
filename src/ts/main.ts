@@ -1,6 +1,7 @@
 import { competitionListController } from './controllers/competitionListController';
 import { competitionController } from './controllers/competitionController';
 import { loadPageNotFound } from './base';
+import { teamListController } from './controllers/teamListController';
 
 const competitionListID = ['2001', '2017', '2021', '2003', '2002', '2015', '2019', '2014', '2013'];
 
@@ -15,6 +16,9 @@ const loadPage = () => {
             break;
         case `competitions/${id}`:
             competitionController(id);
+            break;
+        case `teams`:
+            teamListController(competitionListID);
             break;
         default:
             loadPageNotFound();

@@ -1,32 +1,36 @@
 import {
     elements,
-    apiRequest,
     renderPreloader,
     clearPreloader,
     clearContentBody,
     loadPageNotFound,
+    apiRequest,
 } from '../base';
+import { Team } from '../models/team';
+import { renderTeamSelect } from '../views/teamListView';
 import { Competition } from '../models/competition';
-import { renderCompetitionList } from '../views/competitionListView';
 
-export const competitionListController = async (idList: string[]) => {
+export const teamListController = async (competitionIdList: string[]) => {
     clearContentBody();
-    elements.pageTitle.textContent = 'Competitions';
+    elements.pageTitle.textContent = 'Teams';
     renderPreloader(elements.contentBody);
 
     await apiRequest
-        .getData(`competitions`)
+        .getData('competitions')
         .then((response: any) => {
             let competitionList = new Map();
+            let competitionListFiltered: Array<Competition> = [];
 
             response.competitions.forEach((competition: any) => {
                 competitionList.set(competition.id, competition);
             });
 
-            idList.forEach((id) => {
+            competitionIdList.forEach((id) => {
                 const competition = new Competition(competitionList.get(+id));
-                renderCompetitionList(competition);
+                competitionListFiltered.push(competition);
             });
+
+            renderTeamSelect(competitionListFiltered);
 
             clearPreloader();
         })
