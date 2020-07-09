@@ -33,6 +33,7 @@ export const renderPreloader = (parent: Element) => {
 
 export const loadPageNotFound = () => {
     elements.pageTitle.textContent = '404 not found';
+    elements.contentBody.innerHTML = '';
 };
 
 export const clearPreloader = () => {

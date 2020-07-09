@@ -54,12 +54,13 @@ export const renderCompetition = (item: Competition) => {
 export const renderCompetitionStandings = (standingList: Standing[]) => {
     const standingsTable = document.querySelector('#competition-standings-table');
 
+    // prettier-ignore
     for (const standing of standingList) {
         const markup = `
         <tr>
             <td>${standing.position}</td>
             <td>
-                <img src="${standing.team.crestUrl}" alt="${standing.team.name}" onerror="this.onerror=null; this.src='images/blank-badge.svg'" width="30">
+                <img src="${standing.team.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="${standing.team.name}" onerror="this.onerror=null; this.src='images/blank-badge.svg'" width="30">
             </td>
             <td>${standing.team.name}</td>
             <td>${standing.playedGames}</td>
@@ -76,9 +77,3 @@ export const renderCompetitionStandings = (standingList: Standing[]) => {
         standingsTable.insertAdjacentHTML('beforeend', markup);
     }
 };
-
-// TODO
-
-// export const renderUpcomingMatches = (competitionID: number) => {
-//     const upcomingMatchesTable
-// }
