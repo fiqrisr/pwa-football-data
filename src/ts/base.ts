@@ -1,5 +1,6 @@
 import { APIRequest } from './api';
 import { Bookmarks } from './database/bookmarks';
+import { IBookmark } from './interfaces/interfaces';
 
 const URI: string = 'https://api.football-data.org/v2/';
 const API_TOKEN: string = '321f62aebd5c4bce8a97f2c39a19a455';
@@ -46,4 +47,18 @@ export const clearPreloader = () => {
 
 export const clearContentBody = () => {
     elements.contentBody.innerHTML = '';
+};
+
+export const toggleBookmark = (bookmarkItem: IBookmark) => {
+    const bookmarkButton = document.querySelector(`#bookmark-button-${bookmarkItem.id}`);
+
+    if (!bookmarkButton.classList.contains('saved')) {
+        bookmarkItem.saveToBookmarks();
+        bookmarkButton.classList.toggle('saved');
+        bookmarkButton.querySelector('i').textContent = 'bookmark';
+    } else {
+        bookmarkItem.deleteFromBookmarks();
+        bookmarkButton.classList.toggle('saved');
+        bookmarkButton.querySelector('i').textContent = 'bookmark_border';
+    }
 };

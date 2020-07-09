@@ -27,6 +27,12 @@ export interface ITeam {
     lastUpdated: Date;
 }
 
+export interface IBookmark {
+    id: number;
+    saveToBookmarks(): any;
+    deleteFromBookmarks(): any;
+}
+
 export interface Standing {
     position: number;
     team: { id: string; name: string; crestUrl: string };

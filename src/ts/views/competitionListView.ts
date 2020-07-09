@@ -1,4 +1,4 @@
-import { elements } from '../base';
+import { toggleBookmark, elements } from '../base';
 import { Competition } from '../models/competition';
 
 export const renderCompetitionList = (item: Competition) => {
@@ -8,7 +8,11 @@ export const renderCompetitionList = (item: Competition) => {
             <div class="card">
                 <div class="card-image competition--logo valign-wrapper">
                     <img src="${item.emblemUrl}" alt="${item.name} logo"/>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red accent-3"><i class="material-icons">bookmark_border</i></a>
+                    <a 
+                        class="btn-floating halfway-fab waves-effect waves-light red accent-3"
+                        id="bookmark-button-${item.id}">
+                            <i class="material-icons">bookmark_border</i>
+                    </a>
                 </div>
                 <div class="card-content competition--content">
                     <a href="#competitions/${item.id}" class="card-title blue-text truncate">${item.name}</a>
@@ -19,4 +23,8 @@ export const renderCompetitionList = (item: Competition) => {
     `;
 
     elements.contentBody.insertAdjacentHTML('beforeend', markup);
+
+    document
+        .querySelector(`#bookmark-button-${item.id}`)
+        .addEventListener('click', (e) => toggleBookmark(item));
 };

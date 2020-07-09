@@ -1,8 +1,9 @@
+import * as M from 'materialize-css';
+import { loadPageNotFound } from './base';
 import { competitionListController } from './controllers/competitionListController';
 import { competitionController } from './controllers/competitionController';
-import { loadPageNotFound } from './base';
 import { teamListController } from './controllers/teamListController';
-import * as M from 'materialize-css';
+import { bookmarkController } from './controllers/bookmarkController';
 
 const competitionListID = ['2001', '2017', '2021', '2003', '2002', '2015', '2019', '2014', '2013'];
 
@@ -33,8 +34,11 @@ const loadPage = () => {
         case `competitions/${id}`:
             competitionController(id);
             break;
-        case `teams`:
+        case 'teams':
             teamListController(competitionListID);
+            break;
+        case 'bookmarks':
+            bookmarkController();
             break;
         default:
             loadPageNotFound();

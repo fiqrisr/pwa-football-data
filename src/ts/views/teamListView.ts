@@ -1,4 +1,4 @@
-import { elements } from '../base';
+import { elements, toggleBookmark } from '../base';
 import { Competition } from '../models/competition';
 import { Team } from '../models/team';
 
@@ -28,19 +28,23 @@ export const renderTeamSelect = (competitionList: Array<Competition>) => {
     M.FormSelect.init(teamSelectElement);
 };
 
-export const renderTeam = (team: Team) => {
+export const renderTeam = (item: Team) => {
     // prettier-ignore
     const markup = `
             <div class="col s12 m6 l3">
                 <div class="card">
-                    <div class="card-image team--logo valign-wrapper" id="crest-${team.id}">
-                        <a class="btn-floating halfway-fab waves-effect waves-light red accent-3"><i class="material-icons">bookmark_border</i></a>
+                    <div class="card-image team--logo valign-wrapper" id="crest-${item.id}">
+                        <a
+                            class="btn-floating halfway-fab waves-effect waves-light red accent-3"
+                            id="bookmark-button-${item.id}">
+                                <i class="material-icons">bookmark_border</i>
+                        </a>
                     </div>
                     <div class="card-content team--content">
                         <a href="${
-                            team.website
-                        }" class="card-title blue-text truncate" target="_blank">${team.name}</a>
-                        <p class="">Founded: ${team.founded || '-'}</p>
+                            item.website
+                        }" class="card-title blue-text truncate" target="_blank">${item.name}</a>
+                        <p class="">Founded: ${item.founded || '-'}</p>
                     </div>
                 </div>
             </div>
@@ -49,15 +53,19 @@ export const renderTeam = (team: Team) => {
     // Append team card into team list container
     document.querySelector('#team-list-container').insertAdjacentHTML('beforeend', markup);
 
+    document
+        .querySelector(`#bookmark-button-${item.id}`)
+        .addEventListener('click', (e) => toggleBookmark(item));
+
     // Team crest image element
     let crestImg = document.createElement('img');
-    crestImg.src = team.crestUrl;
+    crestImg.src = item.crestUrl;
     crestImg.onerror = function () {
         this.onerror = null;
         this.src = 'assets/images/blank-badge.svg';
-        team.setCrestUrl('assets/images/blank-badge.svg');
+        item.setCrestUrl('assets/images/blank-badge.svg');
     };
 
     // Append crest image element to team card
-    document.querySelector(`#crest-${team.id}`).insertAdjacentElement('afterbegin', crestImg);
+    document.querySelector(`#crest-${item.id}`).insertAdjacentElement('afterbegin', crestImg);
 };

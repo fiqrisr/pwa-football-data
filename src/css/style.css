@@ -75,3 +75,7 @@ main {
 .select-dropdown li img {
     height: 38px;
 }
+
+.bookmark-container {
+    margin-top: 30px;
+}

@@ -1,7 +1,7 @@
-import { ICompetition, Season, Area } from '../interfaces/interfaces';
+import { ICompetition, Season, Area, IBookmark } from '../interfaces/interfaces';
 import { db } from '../base';
 
-export class Competition implements ICompetition {
+export class Competition implements ICompetition, IBookmark {
     id: number;
     area: Area;
     name: string;
@@ -20,7 +20,7 @@ export class Competition implements ICompetition {
         this.emblemUrl = url;
     }
 
-    save() {
+    saveToBookmarks() {
         return db.transaction('rw', db.competitions, async () => {
             this.id = await db.competitions.put({
                 id: this.id,
@@ -28,6 +28,12 @@ export class Competition implements ICompetition {
                 name: this.name,
                 emblemUrl: this.emblemUrl,
             });
+        });
+    }
+
+    deleteFromBookmarks() {
+        return db.transaction('rw', db.competitions, async () => {
+            await db.competitions.delete(this.id);
         });
     }
 }

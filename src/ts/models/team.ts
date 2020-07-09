@@ -1,7 +1,7 @@
-import { ITeam, Area } from '../interfaces/interfaces';
+import { ITeam, Area, IBookmark } from '../interfaces/interfaces';
 import { db } from '../base';
 
-export class Team implements ITeam {
+export class Team implements ITeam, IBookmark {
     id: number;
     area: Area;
     name: string;
@@ -25,7 +25,7 @@ export class Team implements ITeam {
         this.crestUrl = url;
     }
 
-    save() {
+    saveToBookmarks() {
         return db.transaction('rw', db.teams, async () => {
             this.id = await db.teams.put({
                 id: this.id,
@@ -33,6 +33,12 @@ export class Team implements ITeam {
                 crestUrl: this.crestUrl,
                 founded: this.founded,
             });
+        });
+    }
+
+    deleteFromBookmarks() {
+        return db.transaction('rw', db.teams, async () => {
+            await db.teams.delete(this.id);
         });
     }
 }
