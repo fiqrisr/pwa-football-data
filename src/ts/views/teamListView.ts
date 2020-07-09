@@ -33,8 +33,7 @@ export const renderTeam = (team: Team) => {
     const markup = `
             <div class="col s12 m6 l3">
                 <div class="card">
-                    <div class="card-image team--logo valign-wrapper">
-                        <img src="${team.crestUrl}" alt="${team.name} logo" onerror="handleCrestImage(team)"/>
+                    <div class="card-image team--logo valign-wrapper" id="crest-${team.id}">
                         <a class="btn-floating halfway-fab waves-effect waves-light red accent-3"><i class="material-icons">bookmark_border</i></a>
                     </div>
                     <div class="card-content team--content">
@@ -47,11 +46,18 @@ export const renderTeam = (team: Team) => {
             </div>
         `;
 
+    // Append team card into team list container
     document.querySelector('#team-list-container').insertAdjacentHTML('beforeend', markup);
-};
 
-const handleCrestImage = (team: Team) => {
-    (<HTMLEmbedElement>(<unknown>this)).onerror = null;
-    (<HTMLEmbedElement>(<unknown>this)).src = 'assets/images/blank-badge.svg';
-    team.setCrestUrl('assets/images/blank-badge.svg');
+    // Team crest image element
+    let crestImg = document.createElement('img');
+    crestImg.src = team.crestUrl;
+    crestImg.onerror = function () {
+        this.onerror = null;
+        this.src = 'assets/images/blank-badge.svg';
+        team.setCrestUrl('assets/images/blank-badge.svg');
+    };
+
+    // Append crest image element to team card
+    document.querySelector(`#crest-${team.id}`).insertAdjacentElement('afterbegin', crestImg);
 };
