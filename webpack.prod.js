@@ -18,11 +18,12 @@ module.exports = merge(common, {
             logo: './src/logo.png',
             mode: 'webapp',
             devMode: 'webapp',
+            prefix: 'assets/favicons',
             favicons: {
                 appName: 'PWA Football Data',
                 appShortName: 'Football',
                 developerName: 'Fiqri Syah Redha',
-                developerURL: null, // prevent retrieving from the nearest package.json
+                developerURL: 'https://fsr.my.id',
                 background: '#fff',
                 theme_color: '#1976d2',
                 display: 'standalone',

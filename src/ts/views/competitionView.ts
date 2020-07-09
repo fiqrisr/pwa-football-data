@@ -4,10 +4,11 @@ import { Standing } from '../interfaces/interfaces';
 import * as moment from 'moment';
 
 export const renderCompetition = (item: Competition) => {
+    // prettier-ignore
     const markup = `
         <div class="col s12 center" style="margin-bottom: 30px;">
             <div>
-                <img width="250" src="images/competitions/${item.id}.webp" alt="${item.name} logo">
+                <img width="250" src="assets/images/competitions/${item.id}.webp" alt="${item.name} logo">
             </div>
             <div style="margin-top: 40px">
                 <h5>Current Season:</h5>
@@ -60,7 +61,10 @@ export const renderCompetitionStandings = (standingList: Standing[]) => {
         <tr>
             <td>${standing.position}</td>
             <td>
-                <img src="${standing.team.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="${standing.team.name}" onerror="this.onerror=null; this.src='images/blank-badge.svg'" width="30">
+                <img
+                    src="${standing.team.crestUrl}"
+                    alt="${standing.team.name}"
+                    onerror="this.onerror=null; this.src='assets/images/blank-badge.svg'" width="30">
             </td>
             <td>${standing.team.name}</td>
             <td>${standing.playedGames}</td>

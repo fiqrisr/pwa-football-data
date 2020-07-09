@@ -3,7 +3,7 @@ export interface ICompetition {
     area: Area;
     name: string;
     code: string;
-    emblemUrl: null;
+    emblemUrl: string;
     plan: string;
     currentSeason: Season;
     seasons: Season[];

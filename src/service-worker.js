@@ -5,18 +5,21 @@ const PRECACHE_RESOURCES = [
     '/style.css',
     '/main.js',
     '/service-worker.js',
-    '/fonts/3570bfe74a87405d74f3065d07cf3aea.ttf',
-    '/fonts/4a03f967ab2acff6658734833726789f.woff2',
-    '/images/blank-badge.svg',
-    '/images/competitions/2001.webp',
-    '/images/competitions/2002.webp',
-    '/images/competitions/2003.webp',
-    '/images/competitions/2013.webp',
-    '/images/competitions/2014.webp',
-    '/images/competitions/2015.webp',
-    '/images/competitions/2017.webp',
-    '/images/competitions/2019.webp',
-    '/images/competitions/2021.webp',
+    '/assets/favicons/manifest.json',
+    '/assets/favicons/manifest.webapp',
+    '/assets/favicons/browserconfig.xml',
+    '/assets/fonts/3570bfe74a87405d74f3065d07cf3aea.ttf',
+    '/assets/fonts/4a03f967ab2acff6658734833726789f.woff2',
+    '/assets/images/blank-badge.svg',
+    '/assets/images/competitions/2001.webp',
+    '/assets/images/competitions/2002.webp',
+    '/assets/images/competitions/2003.webp',
+    '/assets/images/competitions/2013.webp',
+    '/assets/images/competitions/2014.webp',
+    '/assets/images/competitions/2015.webp',
+    '/assets/images/competitions/2017.webp',
+    '/assets/images/competitions/2019.webp',
+    '/assets/images/competitions/2021.webp',
 ];
 
 self.addEventListener('install', (event) => {
@@ -32,7 +35,7 @@ self.addEventListener('activate', (event) => {
         caches.keys().then((cacheNames) => {
             return Promise.all(
                 cacheNames.map((cacheName) => {
-                    if (cacheName != CACHE_NAME) {
+                    if (cacheName !== CACHE_NAME) {
                         return caches.delete(cacheName);
                     }
                 })

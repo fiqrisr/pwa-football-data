@@ -21,7 +21,7 @@ export const renderTeamSelect = (competitionList: Array<Competition>) => {
     const teamSelectElement = document.querySelector('#team-select');
 
     competitionList.forEach((competition) => {
-        const option = `<option value="${competition.id}" data-icon="images/competitions/${competition.id}.webp">${competition.name}</option>`;
+        const option = `<option value="${competition.id}" data-icon="assets/images/competitions/${competition.id}.webp">${competition.name}</option>`;
         teamSelectElement.insertAdjacentHTML('beforeend', option);
     });
 
@@ -34,7 +34,7 @@ export const renderTeam = (team: Team) => {
             <div class="col s12 m6 l3">
                 <div class="card">
                     <div class="card-image team--logo valign-wrapper">
-                        <img src="${team.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="${team.name} logo" onerror="this.onerror=null; this.src='images/blank-badge.svg'"/>
+                        <img src="${team.crestUrl}" alt="${team.name} logo" onerror="handleCrestImage(team)"/>
                         <a class="btn-floating halfway-fab waves-effect waves-light red accent-3"><i class="material-icons">bookmark_border</i></a>
                     </div>
                     <div class="card-content team--content">
@@ -48,4 +48,10 @@ export const renderTeam = (team: Team) => {
         `;
 
     document.querySelector('#team-list-container').insertAdjacentHTML('beforeend', markup);
+};
+
+const handleCrestImage = (team: Team) => {
+    (<HTMLEmbedElement>(<unknown>this)).onerror = null;
+    (<HTMLEmbedElement>(<unknown>this)).src = 'assets/images/blank-badge.svg';
+    team.setCrestUrl('assets/images/blank-badge.svg');
 };

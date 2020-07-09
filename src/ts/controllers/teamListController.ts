@@ -55,7 +55,6 @@ const handleSelectTeam = async (competitionID: number) => {
         .then((response: any) => {
             response.teams.forEach((item: any) => {
                 const team = new Team(item);
-
                 renderTeam(team);
             });
 

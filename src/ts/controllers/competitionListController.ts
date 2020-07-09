@@ -25,6 +25,7 @@ export const competitionListController = async (idList: string[]) => {
 
             idList.forEach((id) => {
                 const competition = new Competition(competitionList.get(+id));
+                competition.setEmblemUrl(`assets/images/competitions/${competition.id}.webp`);
                 renderCompetitionList(competition);
             });
 

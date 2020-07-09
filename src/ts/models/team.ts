@@ -1,4 +1,5 @@
 import { ITeam, Area } from '../interfaces/interfaces';
+import { db } from '../base';
 
 export class Team implements ITeam {
     id: number;
@@ -6,7 +7,7 @@ export class Team implements ITeam {
     name: string;
     shortName: string;
     tla: string;
-    crestUrl: string;
+    crestUrl: string | null;
     address: string;
     phone: string;
     website: string;
@@ -18,5 +19,20 @@ export class Team implements ITeam {
 
     constructor(data: Partial<Team> = {}) {
         Object.assign(this, data);
+    }
+
+    setCrestUrl(url: string) {
+        this.crestUrl = url;
+    }
+
+    save() {
+        return db.transaction('rw', db.teams, async () => {
+            this.id = await db.teams.put({
+                id: this.id,
+                name: this.name,
+                crestUrl: this.crestUrl,
+                founded: this.founded,
+            });
+        });
     }
 }

@@ -26,7 +26,7 @@ module.exports = {
                 test: /\.(woff|woff2|ttf|eot)$/,
                 loader: 'file-loader',
                 options: {
-                    outputPath: 'fonts',
+                    outputPath: 'assets/fonts',
                 },
             },
         ],
@@ -52,7 +52,7 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 { from: 'src/service-worker.js', to: 'service-worker.js' },
-                { from: 'src/img', to: 'images/' },
+                { from: 'src/img', to: 'assets/images/' },
             ],
         }),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),

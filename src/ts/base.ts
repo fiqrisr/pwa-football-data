@@ -1,7 +1,10 @@
 import { APIRequest } from './api';
+import { Bookmarks } from './database/bookmarks';
 
 const URI: string = 'https://api.football-data.org/v2/';
 const API_TOKEN: string = '321f62aebd5c4bce8a97f2c39a19a455';
+
+export const db = new Bookmarks();
 
 export const elements = {
     contentBody: document.querySelector('#content-body'),
