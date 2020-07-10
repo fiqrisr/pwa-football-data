@@ -1,6 +1,8 @@
 import { APIRequest } from './api';
 import { Bookmarks } from './database/bookmarks';
 import { IBookmark } from './interfaces/interfaces';
+import { Competition } from './models/competition';
+import { Team } from './models/team';
 
 const URI: string = 'https://api.football-data.org/v2/';
 const API_TOKEN: string = '321f62aebd5c4bce8a97f2c39a19a455';
@@ -49,16 +51,49 @@ export const clearContentBody = () => {
     elements.contentBody.innerHTML = '';
 };
 
-export const toggleBookmark = (bookmarkItem: IBookmark) => {
-    const bookmarkButton = document.querySelector(`#bookmark-button-${bookmarkItem.id}`);
+export const isBookmarked = async (item: IBookmark, table: string) => {
+    let itemFromDatabase: Competition | Team;
 
-    if (!bookmarkButton.classList.contains('saved')) {
+    switch (table) {
+        case 'competitions':
+            await db.transaction('r', db.competitions, async () => {
+                // @ts-ignore
+                await db.competitions.get(item.id, (item) => (itemFromDatabase = item));
+            });
+            break;
+        case 'teams':
+            await db.transaction('r', db.teams, async () => {
+                // @ts-ignore
+                await db.teams.get(item.id, (item) => (itemFromDatabase = item));
+            });
+            break;
+    }
+
+    return itemFromDatabase;
+};
+
+export const toggleBookmark = async (bookmarkItem: IBookmark, table: string) => {
+    if (!(await isBookmarked(bookmarkItem, table))) {
         bookmarkItem.saveToBookmarks();
-        bookmarkButton.classList.toggle('saved');
-        bookmarkButton.querySelector('i').textContent = 'bookmark';
+        changeBookmarkButton(true, bookmarkItem);
+        M.toast({ html: `${bookmarkItem.name} added to bookmarks` });
     } else {
         bookmarkItem.deleteFromBookmarks();
-        bookmarkButton.classList.toggle('saved');
-        bookmarkButton.querySelector('i').textContent = 'bookmark_border';
+        changeBookmarkButton(false, bookmarkItem);
+        M.toast({ html: `${bookmarkItem.name} removed from bookmarks` });
     }
+};
+
+export const toggleBookmarkButton = async (item: IBookmark, table: string) => {
+    if (await isBookmarked(item, table)) {
+        changeBookmarkButton(true, item);
+    } else {
+        changeBookmarkButton(false, item);
+    }
+};
+
+const changeBookmarkButton = (isBookmarked: boolean, bookmarkItem: IBookmark) => {
+    const bookmarkButton = document.querySelector(`#bookmark-button-${bookmarkItem.id}`);
+    bookmarkButton.classList.toggle('saved');
+    bookmarkButton.querySelector('i').textContent = isBookmarked ? 'bookmark' : 'bookmark_border';
 };

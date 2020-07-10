@@ -1,4 +1,4 @@
-import { elements, toggleBookmark } from '../base';
+import { elements, toggleBookmark, toggleBookmarkButton } from '../base';
 import { Competition } from '../models/competition';
 import { Team } from '../models/team';
 
@@ -55,7 +55,10 @@ export const renderTeam = (item: Team) => {
 
     document
         .querySelector(`#bookmark-button-${item.id}`)
-        .addEventListener('click', (e) => toggleBookmark(item));
+        .addEventListener('click', (e) => toggleBookmark(item, 'teams'));
+
+    // Toggle bookmark button
+    toggleBookmarkButton(item, 'teams');
 
     // Team crest image element
     let crestImg = document.createElement('img');

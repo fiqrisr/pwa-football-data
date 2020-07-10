@@ -29,6 +29,7 @@ export interface ITeam {
 
 export interface IBookmark {
     id: number;
+    name: string;
     saveToBookmarks(): any;
     deleteFromBookmarks(): any;
 }

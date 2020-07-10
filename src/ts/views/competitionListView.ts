@@ -1,4 +1,4 @@
-import { toggleBookmark, elements } from '../base';
+import { toggleBookmark, elements, toggleBookmarkButton } from '../base';
 import { Competition } from '../models/competition';
 
 export const renderCompetitionList = (item: Competition) => {
@@ -26,5 +26,8 @@ export const renderCompetitionList = (item: Competition) => {
 
     document
         .querySelector(`#bookmark-button-${item.id}`)
-        .addEventListener('click', (e) => toggleBookmark(item));
+        .addEventListener('click', (e) => toggleBookmark(item, 'competitions'));
+
+    // Toggle bookmark button
+    toggleBookmarkButton(item, 'competitions');
 };
