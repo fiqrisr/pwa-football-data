@@ -46,9 +46,15 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
     event.respondWith(
-        caches.match(event.request).then((cachedRespond) => {
-            if (cachedRespond) return cachedRespond;
-            return fetch(event.request);
-        })
+        fetch(event.request)
+            .then((res) => {
+                return caches.open(CACHE_NAME).then((cache) => {
+                    cache.put(event.request.url, res.clone());
+                    return res;
+                });
+            })
+            .catch((err) => {
+                return caches.match(event.request);
+            })
     );
 });

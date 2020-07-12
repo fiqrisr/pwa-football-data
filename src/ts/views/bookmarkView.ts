@@ -32,7 +32,7 @@ export const renderCompetitionsBookmark = (item: {
                     <a href="#competitions/${item.id}" class="card-title blue-text truncate">${item.name}</a>
                     <p>${item.area}</p>
                 </div>
-                <div class="card-action">
+                <div class="card-action right-align">
                     <a class="waves-effect waves-light btn-small red accent-3" id="remove-${item.id}">
                         <i class="material-icons left">delete</i>Delete
                     </a>
@@ -65,7 +65,7 @@ export const renderTeamsBookmark = (item: {
                     <a href="${item.website}" class="card-title blue-text truncate" target="_blank">${item.name}</a>
                     <p class="">Founded: ${item.founded || '-'}</p>
                 </div>
-                <div class="card-action">
+                <div class="card-action right-align">
                     <a class="waves-effect waves-light btn-small red accent-3" id="remove-${item.id}">
                         <i class="material-icons left">delete</i>Delete
                     </a>

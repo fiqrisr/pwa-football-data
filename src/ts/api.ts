@@ -1,14 +1,9 @@
 export class APIRequest {
     uri: string;
-    token: string;
     headers: {};
 
     constructor(uri: string) {
         this.uri = uri;
-    }
-
-    setHeader(headers: {}) {
-        this.headers = headers;
     }
 
     getData(endpoint: string) {
