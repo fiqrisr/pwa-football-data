@@ -1,5 +1,4 @@
 import { db, elements } from '../base';
-import { Competition } from '../models/competition';
 
 export const renderBookmarkPage = () => {
     const markup = `

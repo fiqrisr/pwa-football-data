@@ -1,8 +1,6 @@
 import { APIRequest } from './api';
 import { Bookmarks } from './database/bookmarks';
 import { IBookmark } from './interfaces/interfaces';
-import { Competition } from './models/competition';
-import { Team } from './models/team';
 
 const URI: string = 'https://api.football-data.org/v2/';
 const API_TOKEN: string = '321f62aebd5c4bce8a97f2c39a19a455';
