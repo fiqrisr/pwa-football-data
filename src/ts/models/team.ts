@@ -32,6 +32,7 @@ export class Team implements ITeam, IBookmark {
                 name: this.name,
                 crestUrl: this.crestUrl,
                 founded: this.founded,
+                website: this.website,
             });
         });
     }

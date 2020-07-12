@@ -51,29 +51,8 @@ export const clearContentBody = () => {
     elements.contentBody.innerHTML = '';
 };
 
-export const isBookmarked = async (item: IBookmark, table: string) => {
-    let itemFromDatabase: Competition | Team;
-
-    switch (table) {
-        case 'competitions':
-            await db.transaction('r', db.competitions, async () => {
-                // @ts-ignore
-                await db.competitions.get(item.id, (item) => (itemFromDatabase = item));
-            });
-            break;
-        case 'teams':
-            await db.transaction('r', db.teams, async () => {
-                // @ts-ignore
-                await db.teams.get(item.id, (item) => (itemFromDatabase = item));
-            });
-            break;
-    }
-
-    return itemFromDatabase;
-};
-
 export const toggleBookmark = async (bookmarkItem: IBookmark, table: string) => {
-    if (!(await isBookmarked(bookmarkItem, table))) {
+    if (!(await db.isBookmarked(bookmarkItem, table))) {
         bookmarkItem.saveToBookmarks();
         changeBookmarkButton(true, bookmarkItem);
         M.toast({ html: `${bookmarkItem.name} added to bookmarks` });
@@ -85,7 +64,7 @@ export const toggleBookmark = async (bookmarkItem: IBookmark, table: string) => 
 };
 
 export const toggleBookmarkButton = async (item: IBookmark, table: string) => {
-    if (await isBookmarked(item, table)) {
+    if (await db.isBookmarked(item, table)) {
         changeBookmarkButton(true, item);
     } else {
         changeBookmarkButton(false, item);
