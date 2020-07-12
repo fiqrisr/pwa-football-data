@@ -6,8 +6,23 @@ const PRECACHE_RESOURCES = [
     '/main.js',
     '/service-worker.js',
     '/assets/favicons/manifest.json',
-    '/assets/favicons/manifest.webapp',
     '/assets/favicons/browserconfig.xml',
+    '/assets/favicons/site.webmanifest',
+    '/assets/images/favicons/android-chrome-144x144.png',
+    '/assets/images/favicons/android-chrome-192x192.png',
+    '/assets/images/favicons/android-chrome-256x256.png',
+    '/assets/images/favicons/android-chrome-36x36.png',
+    '/assets/images/favicons/android-chrome-384x384.png',
+    '/assets/images/favicons/android-chrome-48x48.png',
+    '/assets/images/favicons/android-chrome-512x512.png',
+    '/assets/images/favicons/android-chrome-72x72.png',
+    '/assets/images/favicons/android-chrome-96x96.png',
+    '/assets/images/favicons/apple-touch-icon.png',
+    '/assets/images/favicons/favicon-16x16.png',
+    '/assets/images/favicons/favicon-32x32.png',
+    '/assets/images/favicons/favicon.ico',
+    '/assets/images/favicons/mstile-150x150.png',
+    '/assets/images/favicons/safari-pinned-tab.svg',
     '/assets/fonts/3570bfe74a87405d74f3065d07cf3aea.ttf',
     '/assets/fonts/4a03f967ab2acff6658734833726789f.woff2',
     '/assets/images/blank-badge.svg',
@@ -57,4 +72,22 @@ self.addEventListener('fetch', (event) => {
                 return caches.match(event.request);
             })
     );
+});
+
+self.addEventListener('push', (event) => {
+    let body;
+
+    if (event.data) body = event.data.text();
+    else body = 'Push message no payload';
+
+    const options = {
+        body: body,
+        icon: 'assets/images/blank-badge.svg',
+        data: {
+            dateOfArrival: Date.now(),
+            primaryKey: 1,
+        },
+    };
+
+    event.waitUntil(self.registration.showNotification('Push Notification', options));
 });

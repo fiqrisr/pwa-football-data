@@ -53,6 +53,8 @@ module.exports = {
             patterns: [
                 { from: 'src/service-worker.js', to: 'service-worker.js' },
                 { from: 'src/img', to: 'assets/images/' },
+                { from: 'src/favicons', to: 'assets/images/favicons' },
+                { from: 'src/manifest.json', to: 'assets/images/favicons' },
             ],
         }),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),

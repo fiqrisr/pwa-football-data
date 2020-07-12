@@ -3,7 +3,7 @@ const common = require('./webpack.common');
 const TerserPlugin = require('terser-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+// const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = merge(common, {
     mode: 'production',
@@ -14,7 +14,7 @@ module.exports = merge(common, {
     plugins: [
         new CleanWebpackPlugin(),
         new OptimizeCssAssetsPlugin(),
-        new FaviconsWebpackPlugin({
+        /*new FaviconsWebpackPlugin({
             logo: './src/logo.png',
             mode: 'webapp',
             devMode: 'webapp',
@@ -32,9 +32,11 @@ module.exports = merge(common, {
                 start_url: '/index.html',
                 icons: {
                     coast: false,
+                    firefox: false,
+                    windows: false,
                     yandex: false,
                 },
             },
-        }),
+        }),*/
     ],
 });

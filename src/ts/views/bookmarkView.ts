@@ -42,6 +42,8 @@ export const renderCompetitionsBookmark = (item: {
     `;
 
     document.querySelector('#bookmarks-competitions').insertAdjacentHTML('beforeend', markup);
+
+    // Button to delete bookmark
     document
         .querySelector(`#remove-${item.id}`)
         .addEventListener('click', async (e) => removeBookmarkDialog(item, 'competitions'));
@@ -75,6 +77,8 @@ export const renderTeamsBookmark = (item: {
     `
 
     document.querySelector('#bookmarks-teams').insertAdjacentHTML('beforeend', markup);
+
+    // Button to delete bookmark
     document
         .querySelector(`#remove-${item.id}`)
         .addEventListener('click', async (e) => removeBookmarkDialog(item, 'teams'));
