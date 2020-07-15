@@ -8,6 +8,12 @@ export class APIRequest {
 
     getData(endpoint: string) {
         return new Promise((resolve, reject) => {
+            if ('caches' in window) {
+                caches.match(this.uri + endpoint).then((response) => {
+                    if (response) resolve(response.json());
+                });
+            }
+
             fetch(this.uri + endpoint, {
                 headers: this.headers,
             })

@@ -59,18 +59,23 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        fetch(event.request)
-            .then((res) => {
-                return caches.open(CACHE_NAME).then((cache) => {
-                    cache.put(event.request.url, res.clone());
-                    return res;
+    const base_url = 'https://api.football-data.org/v2/';
+    if (event.request.url.indexOf(base_url) > -1) {
+        event.respondWith(
+            caches.open(CACHE_NAME).then((cache) => {
+                return fetch(event.request).then((response) => {
+                    cache.put(event.request.url, response.clone());
+                    return response;
                 });
             })
-            .catch((err) => {
-                return caches.match(event.request);
+        );
+    } else {
+        event.respondWith(
+            caches.match(event.request, { ignoreSearch: true }).then((response) => {
+                return response || fetch(event.request);
             })
-    );
+        );
+    }
 });
 
 self.addEventListener('push', (event) => {
