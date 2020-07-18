@@ -8,7 +8,7 @@
   "orientation": "any",
   "scope": "/",
   "start_url": "/index.html",
-  "background_color": "#fff",
+  "background_color": "#ffffff",
   "theme_color": "#1976d2",
   "gcm_sender_id": "271540061078",
   "icons": [
