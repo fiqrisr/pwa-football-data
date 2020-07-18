@@ -16,8 +16,12 @@ export const bookmarkController = async () => {
         const competitionsData = await db.competitions.toArray();
         const teamsData = await db.teams.toArray();
 
-        competitionsData.forEach((item) => renderCompetitionsBookmark(item));
-        teamsData.forEach((item) => renderTeamsBookmark(item));
+        if (competitionsData.length != 0)
+            competitionsData.forEach((item) => renderCompetitionsBookmark(item));
+        else document.querySelector('#bookmarks-competitions').innerHTML = '<p>No bookmarks</p>';
+
+        if (teamsData.length != 0) teamsData.forEach((item) => renderTeamsBookmark(item));
+        else document.querySelector('#bookmarks-teams').innerHTML = '<p>No bookmarks</p>';
     });
 
     clearPreloader();

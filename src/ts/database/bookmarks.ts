@@ -42,19 +42,23 @@ export class Bookmarks extends Dexie {
     }
 
     async remove(item: any, table:string) {
-        switch (table) {
-            case 'competitions':
-                await db.transaction('rw', db.competitions, async () => {
-                    // @ts-ignore
-                    await db.competitions.delete(item.id);
-                });
-                break;
-            case 'teams':
-                await db.transaction('rw', db.teams, async () => {
-                    // @ts-ignore
-                    await db.teams.delete(item.id);
-                });
-                break;
-        }
+        return new Promise(async (resolve) => {
+            switch (table) {
+                case 'competitions':
+                    await db.transaction('rw', db.competitions, async () => {
+                        // @ts-ignore
+                        await db.competitions.delete(item.id);
+                        resolve(db.competitions.count());
+                    });
+                    break;
+                case 'teams':
+                    await db.transaction('rw', db.teams, async () => {
+                        // @ts-ignore
+                        await db.teams.delete(item.id);
+                        resolve(db.teams.count());
+                    });
+                    break;
+            }
+        })
     }
 }

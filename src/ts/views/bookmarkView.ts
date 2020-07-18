@@ -88,10 +88,13 @@ const removeBookmarkDialog = async (item: any, fromTable: string) => {
     const removeBookmark = confirm(`Remove ${item.name} from bookmarks?`);
 
     if (removeBookmark) {
-        await db.remove(item, fromTable).then((response) => {
+        await db.remove(item, fromTable).then((count) => {
             document
                 .querySelector(`#bookmarks-${fromTable}`)
                 .removeChild(document.querySelector(`#bookmark-${item.id}`));
+
+            if (count <= 0)
+                document.querySelector(`#bookmarks-${fromTable}`).innerHTML = '<p>No bookmarks</p>';
         });
         M.toast({ html: `${item.name} removed from bookmarks` });
     }
