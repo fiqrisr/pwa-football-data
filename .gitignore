@@ -101,6 +101,7 @@ typings/
 # Nuxt.js build / generate output
 .nuxt
 dist
+public/
 
 # Gatsby files
 .cache/
@@ -229,3 +230,17 @@ fabric.properties
 .idea/$CACHE_FILE$
 
 # End of https://www.toptal.com/developers/gitignore/api/webstorm
+
+
+# Edit at https://www.toptal.com/developers/gitignore?templates=firebase
+
+### Firebase ###
+.idea
+**/node_modules/*
+**/.firebaserc
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
+
+# End of https://www.toptal.com/developers/gitignore/api/firebase
